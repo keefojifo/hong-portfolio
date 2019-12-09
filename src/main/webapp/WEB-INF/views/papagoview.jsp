@@ -1,7 +1,8 @@
+
 <!DOCTYPE HTML>
 <html>
 <head>
-<meta content="text/html; charset=euc-kr">
+<meta charset="UTF-8">
 <title>HTML5</title>
 <style type="text/css">
     body {
@@ -46,13 +47,13 @@
    
     select {
 
-width: 200px; /* 원하는 너비설정 */
-padding: .8em .5em; /* 여백으로 높이 설정 */
-font-family: inherit;  /* 폰트 상속 */
-background: url('이미지 경로') no-repeat 95% 50%; /* 네이티브 화살표를 커스텀 화살표로 대체 */
+width: 200px; /* ìíë ëë¹ì¤ì  */
+padding: .8em .5em; /* ì¬ë°±ì¼ë¡ ëì´ ì¤ì  */
+font-family: inherit;  /* í°í¸ ìì */
+background: url no-repeat 95% 50%; /* ë¤ì´í°ë¸ íì´íë¥¼ ì»¤ì¤í íì´íë¡ ëì²´ */
 border: 1px solid #999;
-border-radius: 0px; /* iOS 둥근모서리 제거 */
--webkit-appearance: none; /* 네이티브 외형 감추기 */
+border-radius: 0px; /* iOS ë¥ê·¼ëª¨ìë¦¬ ì ê±° */
+-webkit-appearance: none; /* ë¤ì´í°ë¸ ì¸í ê°ì¶ê¸° */
 -moz-appearance: none;
 appearance: none;
 }
@@ -97,12 +98,16 @@ button:hover:before,button:hover:after{
 </style>
  
 </head>
+<script
+  src="https://code.jquery.com/jquery-3.4.1.min.js"
+  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+  crossorigin="anonymous"></script>
 <body>
     <div id="wapper">
-        <!--헤더시작-->
+        <!--í¤ëìì-->
         <header>
            
-           <a href="https://papago.naver.com/"><img alt="파파고 이미지" width="200" height="50" src="papago.png"/></a> 
+           <a href="https://papago.naver.com/"><img alt="ííê³  ì´ë¯¸ì§" width="200" height="50" src="papago.png"/></a> 
             
         </header>
         <!--번역창 1-->
@@ -126,8 +131,7 @@ button:hover:before,button:hover:after{
            <br>
             <textarea placeholder="번역할 내용을 입력하세요" style="width:800px;height:150px;font-size:30px;background-color: whitesmoke; border: 1px solid #1AAB8A; "></textarea>
             <button style="float:right">번역하기</button>
-            
-        </nav>
+            </nav>
         <!--번역창 2-->
         <section>
                 <select name="language" >

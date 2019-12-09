@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.sp.papago.papagoInfoMapper">
+	<select id="selectPapagoInfoList" resultType="papago">
+		select * from papago_info order by pi_num desc
+	</select>
+	<select id="selectPapagoInfo" resultType="papago">
+	select* from papago_info
+	where pi_target=rpad(#{piTarget},6,'')
+	where pi_source=rpad(#{piSource},6,'')
+	where pi_text=#{piText}
+	
+	</select>
+	<insert id ="insertPapagoInfo">
+	insert into papago_info
+	values(seq_pi_num.nextval,#{piSource},#{piTarget},#{piText},#{piResult},1)
+	</insert>
+</mapper>

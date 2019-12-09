@@ -1,14 +1,20 @@
 package com.sp.papago.controller;
 
+import java.util.List;
+
+
 import javax.annotation.Resource;
 
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
+
+import org.springframework.web.bind.annotation.GetMapping;
+
 import org.springframework.web.bind.annotation.RestController;
 
-import com.sp.papago.service.PapagoService;
-import com.sp.papago.vo.Message;
-import com.sp.papago.vo.TransVO;
+
+import com.sp.papago.dao.impl.PapagoInfoDAOImpl;
+
+import com.sp.papago.vo.PapagoInfoVO;
+
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -17,11 +23,13 @@ import lombok.extern.slf4j.Slf4j;
 public class PapagoController {
 	
 	@Resource
-	private PapagoService ps;
+	private PapagoInfoDAOImpl pidao;
 
-	@PostMapping("/papago")
-	public Message doTranslate(@ModelAttribute TransVO tvo) {
-		log.info("tvo=>{}",tvo);
-		return ps.doTranslate(tvo);
+	@GetMapping("/papago")
+	public List<PapagoInfoVO> getpapagoInfos(PapagoInfoVO papago) {
+		log.info("controller papago=>{}",papago);
+		return pidao.getPapagoList(null);
 	}
+	
+	
 }
