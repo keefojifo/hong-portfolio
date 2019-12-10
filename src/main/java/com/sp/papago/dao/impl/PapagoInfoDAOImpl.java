@@ -50,7 +50,7 @@ public class PapagoInfoDAOImpl implements PapagoInfoDAO {
 		//auto commit 을 하지못하도록 false를 넣는다 .
 		
 		try {
-			return ss.selectOne("com.sp.papago.papagoInfoMapper.selectPapagoInfo");
+			return ss.selectOne("com.sp.papago.papagoInfoMapper.selectPapagoInfo", tvo);
 			
 		} catch (Exception e) {
 			
@@ -66,12 +66,29 @@ public class PapagoInfoDAOImpl implements PapagoInfoDAO {
 SqlSession ss =ssf.openSession();
 		
 		try {
-			return ss.insert("com.sp.papago.papagoInfoMapper.insertPapagoInfo");
+			return ss.insert("com.sp.papago.papagoInfoMapper.insertPapagoInfo",tvo);
 			
 		} catch (Exception e) {
 			
 			e.printStackTrace();
 		} finally {
+			ss.commit();
+			ss.close();
+		}
+		return 0;
+	}
+	@Override
+	public int updatePapagoInfoForCnt(PapagoInfoVO tvo) {
+SqlSession ss =ssf.openSession();
+		
+		try {
+			return ss.update("com.sp.papago.papagoInfoMapper.updatePapagoInfoForCnt",tvo);
+			
+		} catch (Exception e) {
+			
+			e.printStackTrace();
+		} finally {
+			ss.commit();
 			ss.close();
 		}
 		return 0;

@@ -8,13 +8,19 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
 
+import javax.annotation.Resource;
+
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.remoting.support.RemoteInvocationResult;
 import org.springframework.stereotype.Service;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.sp.papago.dao.impl.PapagoInfoDAOImpl;
 import com.sp.papago.test.PapagoTest;
 import com.sp.papago.vo.Message;
+import com.sp.papago.vo.PapagoInfoVO;
+import com.sp.papago.vo.Result;
 import com.sp.papago.vo.TransVO;
 
 import lombok.extern.slf4j.Slf4j;
@@ -22,7 +28,10 @@ import lombok.extern.slf4j.Slf4j;
 @Service
 @Slf4j
 public class PapagoServiceImpl implements PapagoService {
-
+	
+	@Resource
+	PapagoInfoDAOImpl pidao;
+	
 	@Value("${client.id}")
 	private String id;
 	@Value("${client.secret}")
@@ -36,8 +45,25 @@ public class PapagoServiceImpl implements PapagoService {
 	
 	@Override
 	public Message doTranslate(TransVO tvo) {
-		
+		//DB에서 값을 찾아서 
 			try {
+				PapagoInfoVO pi = new PapagoInfoVO();
+				pi.setPiSource(tvo.getSource());
+				pi.setPiTarget(tvo.getTarget());
+				pi.setPiText(tvo.getText());
+				pi =pidao.selectPapagoInfo(pi);
+				if(pi!=null) {
+					Result r = new Result();
+					r.setSrcLangType(pi.getPiSource());
+					r.setTarLangType(pi.getPiTarget());
+					r.setTranslatedText(pi.getPiResult());
+					Message m = new Message();
+					m.setResult(r);
+					pidao.updatePapagoInfoForCnt(pi);
+					return m;
+				}
+					
+						
 				String text = URLEncoder.encode(tvo.getText(), "UTF-8");
 				URL url = new URL(apiUrl);
 				HttpURLConnection hc =(HttpURLConnection) url.openConnection();
@@ -47,9 +73,9 @@ public class PapagoServiceImpl implements PapagoService {
 				hc.setRequestProperty("X-Naver-Client-Id", id);
 				hc.setRequestProperty("X-Naver-Client-Secret", secret);
 				
-				String param ="source=" +tvo.getSource() +"&target="+ tvo.getTarget() +"&text="+text;
+				String param ="source=" +tvo.getSource() +"&target="+ tvo.getTarget() +"&text=" + text;
 	
-				hc.setDoOutput(true);
+				hc.setDoOutput(true); 
 				
 				DataOutputStream dos = new DataOutputStream(hc.getOutputStream());
 				dos.writeBytes(param);
@@ -74,7 +100,18 @@ public class PapagoServiceImpl implements PapagoService {
 				TransVO resultTvo = om.readValue(res.toString(), TransVO.class);
 				log.info(res.toString());
 				log.info("tvo=>{}",resultTvo);
+				
+				
+				Result r =resultTvo.getMessage().getResult();
+				pi= new PapagoInfoVO();
+				pi.setPiSource(r.getSrcLangType());
+				pi.setPiTarget(r.getTarLangType());
+				pi.setPiResult(r.getTranslatedText());
+				pi.setPiText(tvo.getText());
+				pidao.insertPapagoInfo(pi);
+				
 				return resultTvo.getMessage();
+				
 				//System.out.println(res);
 			} catch (MalformedURLException e) {
 				// TODO Auto-generated catch block

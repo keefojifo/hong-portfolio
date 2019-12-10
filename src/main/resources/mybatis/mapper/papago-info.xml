@@ -5,17 +5,25 @@
 
 <mapper namespace="com.sp.papago.papagoInfoMapper">
 	<select id="selectPapagoInfoList" resultType="papago">
-		select * from papago_info order by pi_num desc
+		select * from papago_info 
 	</select>
+	
 	<select id="selectPapagoInfo" resultType="papago">
-	select* from papago_info
-	where pi_target=rpad(#{piTarget},6,'')
-	where pi_source=rpad(#{piSource},6,'')
-	where pi_text=#{piText}
+	select * from papago_info 
+	where 
+	pi_Target = rpad(#{piTarget},6,' ') 
+	and pi_source = rpad(#{piSource},6,' ') 
+	and pi_text = #{piText}
 	
 	</select>
+	
 	<insert id ="insertPapagoInfo">
-	insert into papago_info
-	values(seq_pi_num.nextval,#{piSource},#{piTarget},#{piText},#{piResult},1)
+	insert into papago_info values(seq_pi_num.nextval,#{piSource},#{piTarget},#{piText},#{piResult},1)
 	</insert>
+	
+	<update id="updatePapagoInfoForCnt">
+		update papago_info
+		set	pi_cnt =pi_cnt+1
+		where pi_num=#{piNum}
+	</update>
 </mapper>

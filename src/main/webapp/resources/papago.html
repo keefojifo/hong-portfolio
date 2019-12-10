@@ -6,10 +6,13 @@
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
 <title>Document</title>
 </head>
+
 <script
-  src="https://code.jquery.com/jquery-3.4.1.min.js"
-  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+  src="https://code.jquery.com/jquery-3.4.1.js"
+  integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
   crossorigin="anonymous"></script>
+
+
 <style>
 #nav-wrap .navs {
 	width: 100%;
@@ -110,7 +113,7 @@
 		<div class="container">
 			<div class="navs">
 				<div class="nav">
-					<span>Papago</span>
+					 <a href="https://papago.naver.com/"><img alt="파파고 이미지" width="200" height="50" src="papago.png"/></a> 
 				</div>
 				<div class="nav">
 					<span>웹사이트 번역</span>
@@ -176,7 +179,11 @@
 				</div>
 				<div class="content-box">
 					<textarea name="air_type"  placeholder="번역내용" id="result"
-						style="width: 85%; height: 300px; border: 0; padding: 10px; overflow-y: hidden; background: clear;resize:none"></textarea>
+						style="width: 85%; height: 300px; border: 0; padding: 10px; overflow-y: hidden; background: clear;resize:none">
+					
+				
+					
+						</textarea>
 				</div>
 			</div>
 		</div>
@@ -189,9 +196,18 @@
 <script>
 $(document).ready(function(){
 	 $('#btn').on('click',function(){
+		 
+		 if($('#source').val() && $('#target').val() == 'none'){
+			 alert('언어 선택 값을 넣어주세요');
+			 
+		 }else{
+		 
 		 var param='source=' + $('#source').val();
 		 param += '&target=' + $('#target').val();
 		 param += '&text=' + $('#text').val();
+		 
+		
+		 
 		 alert(param);
 		 
 		 $.ajax({
@@ -199,14 +215,16 @@ $(document).ready(function(){
 			 method:'POST',
 			 data:param,
 			 success:function(ress){
+				 $('#result').val(ress.result.translatedText);
 				 console.log(ress);
+				
 			 },
 			 error:function(res){
 				 console.log(res);
 			 }
 			 
 		 });
-	 })
+		 }})
 	});
 </script>
 </body>
