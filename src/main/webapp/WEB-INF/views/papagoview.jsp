@@ -47,13 +47,13 @@
    
     select {
 
-width: 200px; /* ìíë ëë¹ì¤ì  */
-padding: .8em .5em; /* ì¬ë°±ì¼ë¡ ëì´ ì¤ì  */
-font-family: inherit;  /* í°í¸ ìì */
-background: url no-repeat 95% 50%; /* ë¤ì´í°ë¸ íì´íë¥¼ ì»¤ì¤í íì´íë¡ ëì²´ */
+width: 200px; 
+padding: .8em .5em; 
+font-family: inherit;  
+background: url no-repeat 95% 50%; 
 border: 1px solid #999;
-border-radius: 0px; /* iOS ë¥ê·¼ëª¨ìë¦¬ ì ê±° */
--webkit-appearance: none; /* ë¤ì´í°ë¸ ì¸í ê°ì¶ê¸° */
+border-radius: 0px; 
+-webkit-appearance: none; 
 -moz-appearance: none;
 appearance: none;
 }

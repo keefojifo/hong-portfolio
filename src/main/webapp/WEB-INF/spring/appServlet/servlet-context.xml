@@ -31,8 +31,8 @@
 			<mvc:mapping path="/**"/>
 			<mvc:exclude-mapping path="/views/user/login"/>
 			<mvc:exclude-mapping path="/login"/>
-			<mvc:exclude-mapping path="/views/error/*"/>
-			<mvc:exclude-mapping path="/views/papago/*"/>
+			<mvc:exclude-mapping path="/views/error/**"/>
+			<mvc:exclude-mapping path="/views/papago/**"/>
 			<mvc:exclude-mapping path="/resources/**"/>
 			<beans:ref bean="sessionInterceptor"/>
 		</mvc:interceptor>

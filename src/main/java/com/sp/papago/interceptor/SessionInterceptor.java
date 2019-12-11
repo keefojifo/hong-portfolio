@@ -26,9 +26,9 @@ public class SessionInterceptor extends HandlerInterceptorAdapter{
 		String uri =req.getRequestURI();
 		
 		log.info("url=>{}",uri);
-		System.out.println(uri);
+		
 		HttpSession hs =req.getSession();
-		System.out.println(hs);
+
 		if(hs.getAttribute("ui")==null) 
 		//UserServiceImpl.java 에서hs.setAttribute 를 받아 오는 hs.getAttribute
 		{
