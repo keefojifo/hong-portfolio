@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
-<body>asdasd
-
+<body>
+로그인 에러가 발생하였습니다. 
 </body>
 </html>

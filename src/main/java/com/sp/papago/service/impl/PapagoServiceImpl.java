@@ -1,4 +1,4 @@
-package com.sp.papago.service;
+package com.sp.papago.service.impl;
 
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sp.papago.dao.impl.PapagoInfoDAOImpl;
+import com.sp.papago.service.PapagoService;
 import com.sp.papago.test.PapagoTest;
 import com.sp.papago.vo.Message;
 import com.sp.papago.vo.PapagoInfoVO;

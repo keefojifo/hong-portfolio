@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 
 import com.sp.papago.dao.impl.PapagoInfoDAOImpl;
-import com.sp.papago.service.PapagoServiceImpl;
+import com.sp.papago.service.impl.PapagoServiceImpl;
 import com.sp.papago.vo.Message;
 import com.sp.papago.vo.PapagoInfoVO;
 import com.sp.papago.vo.TransVO;

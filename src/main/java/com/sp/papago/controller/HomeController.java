@@ -5,9 +5,11 @@ import java.util.Date;
 import java.util.Locale;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -40,7 +42,13 @@ public class HomeController {
 		
 		model.addAttribute("serverTime", formattedDate );
 		
-		return "papagoview";
+		return "home";
+	}
+	
+	@GetMapping("/views/**")
+	public String goPage(HttpServletRequest req) {
+		String uri = req.getRequestURI();
+		return uri.substring(6);
 	}
 	
 }
