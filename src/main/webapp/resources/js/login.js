@@ -22,11 +22,14 @@ $(document).ready(function(){
 		success:function(res){
 			if(res.msg){
 				alert(res.msg);
+				window.location.replace("/views/user/loginsuccess")
+				
 			}
 			console.log(res);
 		},
 		error:function(res){
 			console.log(res);
+			
 			
 		}
 	})

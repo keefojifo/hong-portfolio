@@ -1,6 +1,11 @@
 /**
  * 
  */
+
+function insertHTMLFromServer(conf){
+	$.ajax(conf);
+	 
+}
 $(document).ready(function(){
 	 $('#btn').on('click',function(){
 		 
@@ -31,5 +36,18 @@ $(document).ready(function(){
 			 }
 			 
 		 });
+		 $.ajax({
+			 type : "GET",
+			 url : '/views/user/portfoliologin', 
+			 dataType :'text',
+			 error:function(){
+				 alert('통신실패!!');
+			 },
+			 success : function(data){
+				 $('#login11').html(data);
+			 }
+			 		
+		 })
+		 
 		 }})
 	});
